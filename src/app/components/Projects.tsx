@@ -11,7 +11,7 @@ const projects = [
     technologies: ["Python", "TensorFlow", "Keras", "SHAP", "Flask"],
     image: "/images/project1.png",
     github: "https://github.com/Ankit300302/Intelligent-IDS/tree/main",
-    demo: "#"
+    //demo: "#"
   },
   {
     title: "Job Finding Application",
@@ -19,7 +19,7 @@ const projects = [
     technologies: ["React", "Expo", "JavaScript", "REST API"],
     image: "/images/project2.png",
     github: "https://github.com/Ankit300302/Final-project",
-    demo: "#"
+    //demo: "#"
   },
   {
     title: "Human Detection from Drone Footage",
@@ -27,7 +27,7 @@ const projects = [
     technologies: ["Python", "OpenCV", "AI", "Computer Vision"],
     image: "/images/project3.png",
     github: "https://github.com/Ankit300302/HumanDetection",
-    demo: "#"
+    //demo: "#"
   },
   {
     title: "Hindi Text Refinement Tool",
@@ -35,7 +35,7 @@ const projects = [
     technologies: ["Python", "Flask", "NLP", "Hugging Face", "BERT"],
     image: "/images/project4.png",
     github: "https://github.com/Ankit300302/Hindi-Text-Refinement-Tool",
-    demo: "#"
+    //demo: "#"
   }
 ]
 
@@ -100,7 +100,7 @@ export default function Projects() {
                     >
                       <FiGithub /> Code
                     </a>
-                    {project.demo && (
+                    {/* {project.demo && (
                       <a
                         href={project.demo}
                         target="_blank"
@@ -109,7 +109,7 @@ export default function Projects() {
                       >
                         <FiExternalLink /> Demo
                       </a>
-                    )}
+                    )} */}
                   </div>
                 </div>
               </motion.div>
