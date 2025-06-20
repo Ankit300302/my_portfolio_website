@@ -21,6 +21,14 @@ const education = [
 ]
 
 const certifications = [
+{
+    title: "Deloitte Certified in Data Analytics , Cyber Security and Technology",
+    issuer: "Deloitte",
+    period: "2025",
+    icon: <FiAward />,
+    link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+  },
+
   {
     title: "Certified AWS Cloud Practitioner",
     issuer: "Amazon",
@@ -48,14 +56,8 @@ const certifications = [
     period: "2023",
     icon: <FiAward />,
     link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
-  },
-  {
-    title: "Couchbase Certified",
-    issuer: "Couchbase",
-    period: "2024",
-    icon: <FiAward />,
-    link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
   }
+  
 ]
 
 
@@ -63,10 +65,18 @@ const experience = [
   {
     title: "Android Club Contributor",
     organization: "VIT Chennai",
-    period: "2021 - Present",
+    period: "2021 - 2024",
     description: "Resolved technical issues during events and enhanced skills in Android development",
     icon: <FiBriefcase />
-  }
+  },
+  {
+  title: "Deloitte Virtual Internship",
+  organization: "Deloitte Australia",
+  period: "2025",
+  description: "Gained industry-level experience in cybersecurity, data analysis, and technology through a virtual internship program.",
+  icon: <FiBriefcase />
+}
+
 ]
 
 export default function Experience() {

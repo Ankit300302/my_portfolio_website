@@ -10,7 +10,7 @@ const skills = [
   { name: 'TensorFlow/Keras', level: 80, icon: <FiCpu /> },
   { name: 'C++', level: 75, icon: <FiCode /> },
   { name: 'AWS Cloud', level: 70, icon: <FiDatabase /> },
-  { name: 'React.js', level: 65, icon: <FiCode /> },
+  { name: 'JAVA', level: 65, icon: <FiCode /> },
 ]
 
 export default function About() {
