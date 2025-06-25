@@ -1,7 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FiBook, FiAward, FiBriefcase } from 'react-icons/fi'
+import { FiBook, FiAward, FiBriefcase, FiChevronDown, FiChevronUp } from 'react-icons/fi'
+import { useState } from 'react'
 
 const education = [
   {
@@ -21,45 +22,85 @@ const education = [
 ]
 
 const certifications = [
-{
-    title: "Deloitte Certified in Data Analytics , Cyber Security and Technology",
-    issuer: "Deloitte",
-    period: "2025",
-    icon: <FiAward />,
-    link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
-  },
-
   {
-    title: "Certified AWS Cloud Practitioner",
-    issuer: "Amazon",
-    period: "2023",
-    icon: <FiAward />,
-    link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
-  },
-  {
-    title: "Certified in C++, C and Java",
-    issuer: "IIT Bombay",
-    period: "2021",
-    icon: <FiAward />,
-    link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
-  },
-  {
-    title: "Google Cloud Computing",
-    issuer: "NPTEL - IIT Kharagpur",
-    period: "2023",
-    icon: <FiAward />,
-    link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+    category: "Industry Certifications",
+    items: [
+      {
+        title: "Deloitte Certified in Data Analytics, Cyber Security and Technology",
+        issuer: "Deloitte",
+        period: "2025",
+        icon: <FiAward />,
+        link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+      },
+      {
+        title: "Certified AWS Cloud Practitioner",
+        issuer: "Amazon",
+        period: "2023",
+        icon: <FiAward />,
+        link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+      },
+      {
+        title: "Google Cloud Computing",
+        issuer: "NPTEL - IIT Kharagpur",
+        period: "2023",
+        icon: <FiAward />,
+        link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+      }
+    ]
   },
   {
-    title: "Ethical Hacking Certified",
-    issuer: "Internshala",
-    period: "2023",
-    icon: <FiAward />,
-    link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+    category: "Programming & Development",
+    items: [
+      {
+        title: "Certified in C++, C and Java",
+        issuer: "IIT Bombay",
+        period: "2021",
+        icon: <FiAward />,
+        link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+      },
+      {
+        title: "Full Stack Developer Certification",
+        issuer: "One Roadmap",
+        period: "2023",
+        icon: <FiAward />,
+        link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+      }
+    ]
+  },
+  {
+    category: "AI , Data Science & Cybersecurity",
+    items: [
+      {
+        title: "Ethical Hacking Certified",
+        issuer: "Internshala",
+        period: "2023",
+        icon: <FiAward />,
+        link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+      },
+      {
+        title: "AI Engineer Certification",
+        issuer: "One Roadmap",
+        period: "2025",
+        icon: <FiAward />,
+        link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+      },
+      {
+        title: "CyberSecurity Analyst - IAM",
+        issuer: "Tata / Forage",
+        period: "2025",
+        icon: <FiAward />,
+        link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+      },
+      {
+        title: "AI and Data Scientist Certification",
+        issuer: "One Roadmap",
+        period: "2025",
+        icon: <FiAward />,
+        link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+      }
+    ]
   }
-  
 ]
-
 
 const experience = [
   {
@@ -70,16 +111,25 @@ const experience = [
     icon: <FiBriefcase />
   },
   {
-  title: "Deloitte Virtual Internship",
-  organization: "Deloitte Australia",
-  period: "2025",
-  description: "Gained industry-level experience in cybersecurity, data analysis, and technology through a virtual internship program.",
-  icon: <FiBriefcase />
-}
-
+    title: "Deloitte Virtual Internship",
+    organization: "Deloitte Australia",
+    period: "2025",
+    description: "Gained industry-level experience in cybersecurity, data analysis, and technology through a virtual internship program.",
+    icon: <FiBriefcase />
+  }
 ]
 
 export default function Experience() {
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(null)
+
+  const toggleCategory = (category: string) => {
+    if (expandedCategory === category) {
+      setExpandedCategory(null)
+    } else {
+      setExpandedCategory(category)
+    }
+  }
+
   return (
     <section id="experience" className="py-20">
       <div className="container mx-auto px-6">
@@ -139,34 +189,65 @@ export default function Experience() {
                 </h3>
                 
                 <div className="space-y-4">
-                  {certifications.map((item, index) => (
-  <motion.div
-    key={index}
-    initial={{ opacity: 0, x: 20 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.5, delay: index * 0.1 }}
-    viewport={{ once: true }}
-    className="bg-gray-900/50 border border-gray-800 rounded-lg p-5 backdrop-blur-sm"
-  >
-    <div className="flex items-start gap-4">
-      <div className="mt-1 text-purple-400">
-        {item.icon}
-      </div>
-      <div>
-        <h4 className="font-bold mb-1">{item.title}</h4>
-        <p className="text-gray-400 text-sm">{item.issuer} • {item.period}</p>
-        <a 
-          href={item.link} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="text-cyan-400 text-xs mt-2 inline-block hover:underline"
-        >
-          View Certificate
-        </a>
-      </div>
-    </div>
-  </motion.div>
-))}
+                  {certifications.map((category, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                      className="bg-gray-900/50 border border-gray-800 rounded-lg overflow-hidden backdrop-blur-sm"
+                    >
+                      <button
+                        onClick={() => toggleCategory(category.category)}
+                        className="w-full flex justify-between items-center p-5 hover:bg-gray-800/50 transition-colors"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="text-purple-400">
+                            <FiAward />
+                          </div>
+                          <h4 className="font-bold text-left">{category.category}</h4>
+                        </div>
+                        {expandedCategory === category.category ? (
+                          <FiChevronUp className="text-gray-400" />
+                        ) : (
+                          <FiChevronDown className="text-gray-400" />
+                        )}
+                      </button>
+                      
+                      {expandedCategory === category.category && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="px-5 pb-5 space-y-4"
+                        >
+                          {category.items.map((item, itemIndex) => (
+                            <div key={itemIndex} className="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
+                              <div className="flex items-start gap-4">
+                                <div className="mt-1 text-purple-400">
+                                  {item.icon}
+                                </div>
+                                <div>
+                                  <h4 className="font-bold mb-1">{item.title}</h4>
+                                  <p className="text-gray-400 text-sm">{item.issuer} • {item.period}</p>
+                                  <a 
+                                    href={item.link} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="text-cyan-400 text-xs mt-2 inline-block hover:underline"
+                                  >
+                                    View Certificate
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </motion.div>
+                      )}
+                    </motion.div>
+                  ))}
                 </div>
               </div>
 
