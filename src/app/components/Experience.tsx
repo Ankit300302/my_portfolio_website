@@ -30,21 +30,21 @@ const certifications = [
         issuer: "Deloitte",
         period: "2025",
         icon: <FiAward />,
-        link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+        link: "https://drive.google.com/drive/folders/14n8Ig9OAjWhUM1pWVP14EO96Rp5EHwJP?usp=sharing"
       },
       {
         title: "Certified AWS Cloud Practitioner",
         issuer: "Amazon",
         period: "2023",
         icon: <FiAward />,
-        link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+        link: "https://drive.google.com/file/d/1lwpX-4sui4Mc2lQL0vZCz7BZ4VQGKCvc/view?usp=sharing"
       },
       {
         title: "Google Cloud Computing",
         issuer: "NPTEL - IIT Kharagpur",
         period: "2023",
         icon: <FiAward />,
-        link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+        link: "https://drive.google.com/file/d/1ImDL_3TTwsi-rsgvjRuRPxB4kSLs7XJq/view?usp=sharing"
       }
     ]
   },
@@ -56,14 +56,14 @@ const certifications = [
         issuer: "IIT Bombay",
         period: "2021",
         icon: <FiAward />,
-        link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+        link: "https://drive.google.com/drive/folders/1GRu-vmZz7PJx7Ds7EsNZgtdjR0YFIzaZ?usp=sharing"
       },
       {
         title: "Full Stack Developer Certification",
         issuer: "One Roadmap",
         period: "2023",
         icon: <FiAward />,
-        link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+        link: "https://drive.google.com/file/d/1kinXMsPsspTnyMe5jsI0pXhQE7hwY_fy/view?usp=sharing"
       }
     ]
   },
@@ -75,28 +75,28 @@ const certifications = [
         issuer: "Internshala",
         period: "2023",
         icon: <FiAward />,
-        link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+        link: "https://drive.google.com/file/d/1Bd-_q4h2BRpRkP4omNNnM_d9DkBDbo4d/view?usp=sharing"
       },
       {
         title: "AI Engineer Certification",
         issuer: "One Roadmap",
         period: "2025",
         icon: <FiAward />,
-        link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+        link: "https://drive.google.com/file/d/1huAv2Ih4esAxFEmNgr8CrrA6GaVPiOIc/view?usp=sharing"
       },
       {
         title: "CyberSecurity Analyst - IAM",
         issuer: "Tata / Forage",
         period: "2025",
         icon: <FiAward />,
-        link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+        link: "https://drive.google.com/file/d/1a1REDMWbZNK_OO3EAp_lHjYO0NTXASOC/view?usp=sharing"
       },
       {
         title: "AI and Data Scientist Certification",
         issuer: "One Roadmap",
         period: "2025",
         icon: <FiAward />,
-        link: "https://drive.google.com/drive/folders/1ELppLH1RhqVGy4vFrEd3UvyFbjXjTnzZ?usp=sharing"
+        link: "https://drive.google.com/file/d/174HEgLqPT_2BUaSF-o3ub_0Rio_Zkyfz/view?usp=sharing"
       }
     ]
   }
