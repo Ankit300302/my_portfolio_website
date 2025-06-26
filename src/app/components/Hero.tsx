@@ -92,13 +92,15 @@ export default function Hero() {
             </motion.h1>
             
             <motion.h2 
-              className="text-2xl md:text-3xl text-gray-300 mb-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-            >
-              <span className="text-cyan-400">AI Engineer</span> & <span className="text-purple-400">Data Scientist</span> building intelligent systems
-            </motion.h2>
+  className="text-2xl md:text-3xl text-gray-300 mb-8"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 0.4 }}
+>
+  <span className="text-cyan-400">Driven by Logic</span> <span className="text-gray-300">&</span> <span className="text-purple-400">Powered by Curiosity</span><br />
+  <span className="text-cyan-400">Code.</span> <span className="text-purple-400">Create.</span> <span className="text-cyan-400">Conquer.</span>
+</motion.h2>
+
             
             <motion.div
               className="flex flex-wrap gap-4 mb-12"
