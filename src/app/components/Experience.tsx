@@ -98,6 +98,13 @@ const certifications = [
         period: "2025",
         icon: <FiAward />,
         link: "https://drive.google.com/file/d/174HEgLqPT_2BUaSF-o3ub_0Rio_Zkyfz/view?usp=sharing"
+      },
+      {
+        title: " Data Science & Analytics Certification",
+        issuer: "HP Life",
+        period: "2025",
+        icon: <FiAward />,
+        link: "https://drive.google.com/file/d/1MYqoZvhrFUi1Igo_AJIHO6wakgNZoNhj/view?usp=sharing"
       }
     ]
   }
