@@ -137,7 +137,7 @@ export default function Hero() {
               <a href="mailto:ankit300302@gmail.com" className="text-gray-400 hover:text-white transition-colors">
                 <FiMail size={28} />
               </a>
-              <a href="/resume.pdf" download className="text-gray-400 hover:text-white transition-colors">
+              <a href="/ANKIT SINGH.pdf" download className="text-gray-400 hover:text-white transition-colors">
                 <FiDownload size={28} />
               </a>
             </motion.div>

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { FiBook, FiAward, FiBriefcase, FiChevronDown, FiChevronUp, FiX } from 'react-icons/fi'
 import { useState } from 'react'
 import Image from 'next/image'
+import { FiExternalLink } from "react-icons/fi";
 
 const education = [
   {
@@ -128,21 +129,26 @@ const experience = [
 ]
 
 const badges = [
-  // Add your badge images in public/images/badges folder
-  // Example:
   {
     id: 1,
     name: "Google Generative AI Skill Badge",
     image: "/images/badges/build-real-world-ai-applications-with-gemini-and-im.png",
+    
   },
   {
     id: 2,
     name: "Google Generative AI Skill Badge",
     image: "/images/badges/prompt-design-in-vertex-ai-skill-badge.png",
+    
   },
-  
-  // Add more badges as you earn them
-]
+  {
+    id: 3,
+    name: "Google Generative AI INTERMEDIATE Skill Badge",
+    image: "/images/badges/develop-genai-apps-with-gemini-and-streamlit-skill-.png",
+    
+  }
+];
+
 
 export default function Experience() {
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null)
@@ -207,41 +213,54 @@ export default function Experience() {
               </div>
 
               {/* Badges Section - Added here to maintain layout */}
-              <div className="mt-12">
-                <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-                  <FiAward className="text-yellow-400" />
-                  <span>Badges</span>
-                </h3>
-                
-                <div className="grid grid-cols-3 sm:grid-cols-4 gap-4">
-                  {badges.map((badge) => (
-                    <motion.div
-                      key={badge.id}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3 }}
-                      viewport={{ once: true }}
-                      className="flex flex-col items-center"
-                    >
-                      <button
-                        onClick={() => setSelectedBadge(badge.id)}
-                        className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-yellow-400 hover:border-yellow-300 transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50"
-                      >
-                        <div className="w-full h-full relative">
-                          <Image
-                            src={badge.image}
-                            alt={badge.name}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 640px) 64px, 80px"
-                          />
-                        </div>
-                      </button>
-                      <p className="text-xs sm:text-sm text-center mt-2 text-gray-300">{badge.name}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+             <div className="mt-12">
+  <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+    <FiAward className="text-yellow-400" />
+    <span>Badges</span>
+  </h3>
+  
+  {/* Verification Link Button - Added above badges */}
+  <div className="mb-4 flex justify-center">
+    <a
+      href="https://www.cloudskillsboost.google/public_profiles/7511b067-f684-4df4-ae2f-3acc0062b31d"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-400 hover:bg-yellow-300 text-black font-medium rounded-md transition-colors text-sm mb-4"
+    >
+      <FiExternalLink size={16} />
+      Verify All Badges
+    </a>
+  </div>
+  
+  <div className="grid grid-cols-3 sm:grid-cols-4 gap-4">
+    {badges.map((badge) => (
+      <motion.div
+        key={badge.id}
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.3 }}
+        viewport={{ once: true }}
+        className="flex flex-col items-center"
+      >
+        <button
+          onClick={() => setSelectedBadge(badge.id)}
+          className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-yellow-400 hover:border-yellow-300 transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50"
+        >
+          <div className="w-full h-full relative">
+            <Image
+              src={badge.image}
+              alt={badge.name}
+              fill
+              className="object-cover"
+              sizes="(max-width: 640px) 64px, 80px"
+            />
+          </div>
+        </button>
+        <p className="text-xs sm:text-sm text-center mt-2 text-gray-300">{badge.name}</p>
+      </motion.div>
+    ))}
+  </div>
+</div>
             </div>
 
             <div className="md:w-1/2">
@@ -349,35 +368,46 @@ export default function Experience() {
         </motion.div>
       </div>
 
-      {/* Modal for showing full badge image */}
-      {selectedBadge !== null && (
-        <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4">
-          <div className="relative max-w-2xl w-full">
-            <button
-              onClick={() => setSelectedBadge(null)}
-              className="absolute -top-10 right-0 text-white hover:text-yellow-400 transition-colors"
-            >
-              <FiX size={24} />
-            </button>
-            
-            <div className="bg-gray-900 rounded-lg overflow-hidden border border-gray-700">
-              <div className="relative w-full aspect-square">
-                <Image
-                  src={badges.find(b => b.id === selectedBadge)!.image}
-                  alt={badges.find(b => b.id === selectedBadge)!.name}
-                  fill
-                  className="object-contain"
-                />
-              </div>
-              <div className="p-4 text-center">
-                <h3 className="text-xl font-bold text-white">
-                  {badges.find(b => b.id === selectedBadge)!.name}
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+     {/* Modal for showing full badge image */}
+{selectedBadge !== null && (
+  <div
+    className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4"
+    onClick={() => setSelectedBadge(null)}
+  >
+    <div
+      className="relative max-w-2xl w-full bg-gray-900 rounded-lg overflow-hidden border border-gray-700"
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* Close Button */}
+      <button
+        onClick={() => setSelectedBadge(null)}
+        className="absolute -top-10 right-0 text-white hover:text-yellow-400 transition-colors z-10"
+      >
+        <FiX size={24} />
+      </button>
+
+      {/* Badge Image */}
+      <div className="relative w-full aspect-square">
+        <Image
+          src={badges.find(b => b.id === selectedBadge)!.image}
+          alt={badges.find(b => b.id === selectedBadge)!.name}
+          fill
+          className="object-contain p-4"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
+      </div>
+
+      {/* Text Content - Fixed to bottom */}
+      <div className="p-4 text-center bg-gray-900/80 backdrop-blur-sm border-t border-gray-700">
+        <h3 className="text-xl font-bold text-white mb-3">
+          {badges.find(b => b.id === selectedBadge)!.name}
+        </h3>
+        
+       
+      </div>
+    </div>
+  </div>
+)}
     </section>
   )
 }
