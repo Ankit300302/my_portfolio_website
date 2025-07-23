@@ -11,7 +11,7 @@ const projects = [
     technologies: ["Python", "TensorFlow", "Keras", "SHAP", "Flask"],
     image: "/images/project1.png",
     github: "https://github.com/Ankit300302/Intelligent-IDS/tree/main",
-    //demo: "#"
+    demo: "https://drive.google.com/file/d/1vf1aGJJMerv7OKdCPO7eYIUDlE1NwG4e/view?usp=sharing"
   },
   {
     title: "Job Finding Application",
@@ -35,7 +35,7 @@ const projects = [
     technologies: ["Python", "Flask", "NLP", "Hugging Face", "BERT"],
     image: "/images/project4.png",
     github: "https://github.com/Ankit300302/Hindi-Text-Refinement-Tool",
-    //demo: "#"
+    demo: "https://drive.google.com/file/d/1m7YA-7bgC1SNHdlVzTkqcgJO4SP6r9KN/view?usp=sharing"
   }
 ]
 
@@ -100,16 +100,16 @@ export default function Projects() {
                     >
                       <FiGithub /> Code
                     </a>
-                    {/* {project.demo && (
+                    {project.demo && (
                       <a
                         href={project.demo}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
                       >
-                        <FiExternalLink /> Demo
+                        <FiExternalLink /> Demo Video
                       </a>
-                    )} */}
+                    )}
                   </div>
                 </div>
               </motion.div>
