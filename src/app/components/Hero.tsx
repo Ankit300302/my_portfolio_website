@@ -1,66 +1,114 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Text } from '@react-three/drei'
-import { FiGithub, FiLinkedin, FiMail, FiDownload } from 'react-icons/fi'
-import * as THREE from 'three'
-import { useRef } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { motion } from 'framer-motion';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, Text } from '@react-three/drei';
+import { FiGithub, FiLinkedin, FiMail, FiDownload } from 'react-icons/fi';
+import * as THREE from 'three';
+import { useRef, useEffect, useState } from 'react';
 
-const SkillSphere = () => {
-  const meshRef = useRef<THREE.Mesh>(null)
-
-  useFrame((state, delta) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y += delta * 0.2
+const FloatingSkill = ({ skill, radius, speed, angle }: { skill: string; radius: number; speed: number; angle: number }) => {
+  const ref = useRef<THREE.Group>(null);
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+    if (ref.current) {
+      const x = radius * Math.cos(t * speed + angle);
+      const y = Math.sin(t * 0.5 + angle) * 0.3; // floating up/down
+      const z = radius * Math.sin(t * speed + angle);
+      ref.current.position.set(x, y, z);
+      ref.current.rotation.y = t * 0.2;
     }
-  })
+  });
+
+  return (
+    <group ref={ref}>
+      <Text fontSize={0.15} color="#00F5FF" anchorX="center" anchorY="middle" outlineWidth={0.004} outlineColor="#00F5FF">
+        {skill}
+      </Text>
+    </group>
+  );
+};
+
+const EnergyGlobe = () => {
+  const ringRef = useRef<THREE.Mesh>(null);
+
+  useFrame(({ clock }) => {
+    if (ringRef.current) {
+      ringRef.current.rotation.y = clock.getElapsedTime() * 0.6;
+    }
+  });
 
   const skills = [
     'Python', 'AI', 'ML', 'TensorFlow',
     'C++', 'AWS', 'React', 'NLP', 'Flask',
     'SQL', 'OpenCV', 'Java', 'Data Science'
-  ]
+  ];
 
   return (
     <group>
-      <mesh ref={meshRef}>
-        <sphereGeometry args={[0.8, 32, 32]} />
-        <meshStandardMaterial
-          color="#00F5FF"
-          wireframe
-          emissive="#00F5FF"
-          emissiveIntensity={0.3}
-          transparent
-          opacity={0.8}
-        />
+      {/* Pulsating Core */}
+      <mesh>
+        <sphereGeometry args={[0.9, 64, 64]} />
+        <meshStandardMaterial color="#00F5FF" emissive="#00F5FF" emissiveIntensity={0.6} transparent opacity={0.15} />
       </mesh>
 
-      {skills.map((skill, i) => {
-        const phi = Math.acos(-1 + (2 * i) / skills.length)
-        const theta = Math.sqrt(skills.length * Math.PI) * phi
+      {/* Outer Glowing Layer */}
+      <mesh scale={1.2}>
+        <sphereGeometry args={[0.9, 64, 64]} />
+        <meshBasicMaterial color="#00F5FF" wireframe transparent opacity={0.2} />
+      </mesh>
 
-        return (
-          <Text
-            key={i}
-            position={new THREE.Vector3().setFromSphericalCoords(
-              1.0,
-              phi,
-              theta
-            )}
-            fontSize={0.12}
-            color="#00F5FF"
-            anchorX="center"
-            anchorY="middle"
-          >
-            {skill}
-          </Text>
-        )
-      })}
+      {/* Rotating Ring */}
+      <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[1.5, 0.01, 16, 100]} />
+        <meshBasicMaterial color="#00F5FF" transparent opacity={0.3} />
+      </mesh>
+
+      {/* Floating Skills */}
+      {skills.map((skill, i) => (
+        <FloatingSkill
+          key={i}
+          skill={skill}
+          radius={2}
+          speed={0.4 + (i % 3) * 0.1}
+          angle={(i / skills.length) * Math.PI * 2}
+        />
+      ))}
     </group>
-  )
-}
+  );
+};
+
+const TypingText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
+  const [displayedText, setDisplayedText] = useState('');
+  const [cursorVisible, setCursorVisible] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      let i = 0;
+      const interval = setInterval(() => {
+        setDisplayedText(text.slice(0, i));
+        i++;
+        if (i > text.length) clearInterval(interval);
+      }, 70);
+    }, delay);
+
+    const cursorBlink = setInterval(() => {
+      setCursorVisible((v) => !v);
+    }, 500);
+
+    return () => {
+      clearTimeout(timeout);
+      clearInterval(cursorBlink);
+    };
+  }, [text, delay]);
+
+  return (
+    <span>
+      {displayedText}
+      {cursorVisible && <span className="text-cyan-400">|</span>}
+    </span>
+  );
+};
 
 export default function Hero() {
   return (
@@ -75,13 +123,8 @@ export default function Hero() {
 
       <div className="container mx-auto px-6 relative z-20 h-full">
         <div className="flex flex-col md:flex-row items-center justify-between h-full">
-          {/* Left Column - Text Content (takes 2/3 width) */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="w-full md:w-2/3 h-full flex flex-col justify-center py-12"
-          >
+          {/* Left Column */}
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} className="w-full md:w-2/3 h-full flex flex-col justify-center py-12">
             <motion.h1
               className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
               initial={{ opacity: 0 }}
@@ -91,198 +134,73 @@ export default function Hero() {
               Ankit Singh
             </motion.h1>
 
-            <motion.h2
-              className="text-2xl md:text-3xl text-gray-300 mb-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-            >
-              <span className="text-cyan-400">Driven by Logic</span> <span className="text-gray-300">&</span> <span className="text-purple-400">Powered by Curiosity</span><br />
-              <span className="text-cyan-400">Code.</span> <span className="text-purple-400">Create.</span> <span className="text-cyan-400">Conquer.</span>
+            <motion.h2 className="text-2xl md:text-3xl text-gray-300 mb-8 leading-relaxed" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
+              <span className="text-cyan-400"><TypingText text="Driven by Logic" /></span>{' '}
+              <span className="text-gray-300">&</span>{' '}
+              <span className="text-purple-400"><TypingText text="Powered by Curiosity" delay={1000} /></span>
+              <br />
+              <span className="text-cyan-400"><TypingText text="Code." delay={2500} /></span>{' '}
+              <span className="text-purple-400"><TypingText text="Create." delay={3200} /></span>{' '}
+              <span className="text-cyan-400"><TypingText text="Conquer." delay={3900} /></span>
             </motion.h2>
 
-
-            <motion.div
-              className="flex flex-wrap gap-4 mb-12"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-            >
-              <a
-                href="#projects"
-                className="px-8 py-4 text-lg bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg font-medium hover:shadow-lg hover:shadow-cyan-500/20 transition-all"
-              >
+            {/* Buttons */}
+            <motion.div className="flex flex-wrap gap-4 mb-12" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
+              <a href="#projects" className="px-8 py-4 text-lg bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg font-medium hover:shadow-lg hover:shadow-cyan-500/20 transition-all">
                 View Projects
               </a>
-              <a
-                href="#contact"
-                className="px-8 py-4 text-lg border-2 border-gray-700 rounded-lg font-medium hover:bg-gray-800/50 transition-all"
-              >
+              <a href="#contact" className="px-8 py-4 text-lg border-2 border-gray-700 rounded-lg font-medium hover:bg-gray-800/50 transition-all">
                 Contact Me
               </a>
             </motion.div>
 
-            <motion.div
-              className="flex gap-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8 }}
-            >
-              <a href="https://github.com/Ankit300302" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-                <FiGithub size={28} />
-              </a>
-              <a href="https://linkedin.com/in/ankit-singh-056257288" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-                <FiLinkedin size={28} />
-              </a>
-              <a href="mailto:ankit300302@gmail.com" className="text-gray-400 hover:text-white transition-colors">
-                <FiMail size={28} />
-              </a>
-              <a href="/ANKIT SINGH.pdf" download className="text-gray-400 hover:text-white transition-colors">
-                <FiDownload size={28} />
-              </a>
+            {/* Social Links */}
+            <motion.div className="flex gap-6" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
+              <a href="https://github.com/Ankit300302" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors"><FiGithub size={28} /></a>
+              <a href="https://linkedin.com/in/ankit-singh-056257288" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors"><FiLinkedin size={28} /></a>
+              <a href="mailto:ankit300302@gmail.com" className="text-gray-400 hover:text-white transition-colors"><FiMail size={28} /></a>
+              <a href="/ANKIT SINGH.pdf" download className="text-gray-400 hover:text-white transition-colors"><FiDownload size={28} /></a>
             </motion.div>
           </motion.div>
 
-          {/* Right Column - 3D Visualization (takes 1/3 width) */}
+          {/* Right Column */}
           <div className="w-full md:w-1/3 h-[400px] md:h-[500px] relative">
             <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
               <ambientLight intensity={0.5} />
               <pointLight position={[10, 10, 10]} intensity={1} />
               <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-              <SkillSphere />
-              <OrbitControls
-                enableZoom={false}
-                autoRotate
-                autoRotateSpeed={1.5}
-                enablePan={false}
-                minPolarAngle={Math.PI / 3}
-                maxPolarAngle={Math.PI / 3}
-              />
+              <EnergyGlobe />
+              <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={1.2} enablePan={false} />
             </Canvas>
           </div>
         </div>
-
-        {/* Scroll Indicator */}
-        {/* Enhanced Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{
-            opacity: 1,
-            y: [0, 15, 0],
-            transition: {
-              delay: 1.2,
-              repeat: Infinity,
-              repeatType: "loop",
-              duration: 2,
-              ease: "easeInOut"
-            }
-          }}
-        >
-          {/* Triple Dot Pulse Animation */}
-          <div className="flex gap-1 mb-2">
-            {[1, 2, 3].map((dot) => (
-              <motion.div
-                key={dot}
-                className="w-2 h-2 bg-cyan-400 rounded-full"
-                animate={{
-                  opacity: [0.3, 1, 0.3],
-                  scale: [0.8, 1.2, 0.8],
-                  y: [0, -5, 0]
-                }}
-                transition={{
-                  delay: dot * 0.15,
-                  duration: 1.5,
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  ease: "easeInOut"
-                }}
-              />
-            ))}
-          </div>
-
-          {/* Animated Chevron */}
-          <motion.div
-            className="text-cyan-400"
-            animate={{
-              y: [0, 10, 0],
-              opacity: [0.6, 1, 0.6]
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              repeatType: "loop",
-              ease: "easeInOut"
-            }}
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
-            </svg>
-          </motion.div>
-
-          {/* Scroll Text */}
-          <motion.p
-            className="text-xs text-cyan-400 mt-2"
-            animate={{
-              opacity: [0.6, 1, 0.6]
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              repeatType: "loop"
-            }}
-          >
-            Scroll to explore
-          </motion.p>
-        </motion.div>
       </div>
     </section>
-  )
+  );
 }
 
 const Particles = () => {
-  const particlesRef = useRef<THREE.Points>(null)
-  const particles = useRef<Float32Array>(new Float32Array(5000 * 3))
+  const particlesRef = useRef<THREE.Points>(null);
+  const positions = useRef<Float32Array>(new Float32Array(3000 * 3));
 
-  useFrame((state, delta) => {
-    if (particlesRef.current) {
-      particlesRef.current.rotation.x -= delta / 10
-      particlesRef.current.rotation.y -= delta / 15
+  useEffect(() => {
+    for (let i = 0; i < positions.current.length; i++) {
+      positions.current[i] = (Math.random() - 0.5) * 8;
     }
-  })
+  }, []);
 
-  for (let i = 0; i < 5000 * 3; i++) {
-    particles.current[i] = (Math.random() - 0.5) * 5
-  }
+  useFrame(({ clock }) => {
+    if (particlesRef.current) {
+      particlesRef.current.rotation.y = clock.getElapsedTime() * 0.02;
+    }
+  });
 
   return (
-    <Points ref={particlesRef} positions={particles.current} stride={3}>
-      <PointMaterial
-        transparent
-        color="#00F5FF"
-        size={0.005}
-        sizeAttenuation={true}
-        depthWrite={false}
-        opacity={0.3}
-        blending={THREE.AdditiveBlending}
-      />
-    </Points>
-  )
-}
-
-const PointMaterial = ({ ...props }: any) => {
-  return <pointsMaterial {...props} />
-}
-
-const Points = ({ ...props }: any) => {
-  return <points {...props} />
-}
+    <points ref={particlesRef}>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position" args={[positions.current, 3]} />
+      </bufferGeometry>
+      <pointsMaterial size={0.01} color="#00F5FF" transparent opacity={0.4} blending={THREE.AdditiveBlending} />
+    </points>
+  );
+};

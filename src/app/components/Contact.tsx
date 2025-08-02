@@ -194,7 +194,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-300 mb-1">Location</h4>
-                      <p className="text-gray-400">Chennai, Tamil Nadu, India</p>
+                      <p className="text-gray-400">Varanasi, Uttar Pradesh, India</p>
                     </div>
                   </div>
 
