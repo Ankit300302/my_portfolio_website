@@ -12,6 +12,7 @@ type Project = {
   image: string;
   github: string;
   demo?: string;
+  livedemo? : string;
 };
 
 const projects: Project[] = [
@@ -21,7 +22,17 @@ const projects: Project[] = [
     technologies: ["Python", "LLMs", "REST API", "BeautifulSoup", "Web Scraping", "AI"],
     image: "/images/project5.png",
     github: "https://github.com/Ankit300302/Intelligent_Comapny_researcher",
+    demo: "https://drive.google.com/file/d/1oy1NyIS5zRX_dwBxSIpntZWF6jtma4OP/view"
   },
+  {
+  title: "Phishing Website Detector",
+  description: "Leveraging ML models trained on URL-based features to detect phishing sites with interpretable results and real-time UI feedback.",
+  technologies: ["Python", "Flask", "scikit-learn", "Beautiful Soup", "pandas", "NumPy", "Requests", "whois", "googlesearch-python", "Gunicorn", "HTML/CSS", "Jupyter Notebook"],
+  image: "/images/project6.png",
+  github: "https://github.com/Ankit300302/phishing-website-detector",
+  livedemo: "https://phishing-website-detector-g5da.onrender.com"
+},
+
   {
     title: "Intelligent Intrusion Detection System",
     description: "Next-Gen Network Security with Explainable AI and Adaptive Feature Engineering. Trained on 175,341 network traffic samples from UNSW-NB15 dataset.",
@@ -184,6 +195,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
               className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
             >
               <FiExternalLink /> Demo Video
+            </a>
+          )}
+          {project.livedemo && (
+            <a
+              href={project.livedemo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+            >
+              <FiExternalLink /> Live 
             </a>
           )}
         </div>

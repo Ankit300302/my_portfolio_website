@@ -75,7 +75,7 @@ const certifications = [
       {
         title: "Coreline Solutions Intership in Data Science",
         issuer: "Coreline Solutions",
-        period: "01/06/2025 - 31/07/2025",
+        period: "2025",
         icon: <FiAward />,
         link: "https://drive.google.com/file/d/1-R90ZfVKGE22S2Yr-fnXJtSpaegpwxIk/view?usp=sharing"
       },
@@ -120,14 +120,14 @@ const certifications = [
 
 const experience = [
 
-  {
-    title: "Coreline Solutions Data Science Intern",
-    organization: "Coreline Solutions",
-    period: "1st June 2025 - 31st July 2025",
-    description: "Developed a Dynamic Pricing Model for price estimation on events booking website",
+  // {
+  //   title: "Coreline Solutions Data Science Intern",
+  //   organization: "Coreline Solutions",
+  //   period: "1st June 2025 - 31st July 2025",
+  //   description: "Developed a Dynamic Pricing Model for price estimation on events booking website",
 
-    icon: <FiBriefcase />
-  },
+  //   icon: <FiBriefcase />
+  // },
   {
     title: "Android Club Contributor ",
     organization: "VIT Chennai",
